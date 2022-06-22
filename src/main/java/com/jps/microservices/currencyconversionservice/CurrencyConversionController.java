@@ -46,8 +46,12 @@ public class CurrencyConversionController {
 	public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
 													   @PathVariable BigDecimal quantity) {
 
+		logger.info("Currency Conversion Service method In ... ");
+
 		CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+
 		logger.info("{}", response);
+		logger.info("Currency Conversion Service method Out ... ");
 
 		return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
 				quantity.multiply(response.getConversionMultiple()), response.getPort());
